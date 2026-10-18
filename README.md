@@ -11,7 +11,6 @@
 
 <a href="https://v1vpn-free.duckdns.org/"><img src="https://img.shields.io/badge/Website-v1vpn--free.duckdns.org-e03c3c?style=for-the-badge" alt="Сайт"></a>
 <img src="https://img.shields.io/badge/version-0.1.0--alpha-e03c3c?style=for-the-badge" alt="Версия">
-<a href="https://github.com/v1kserr/V1Vpn-Free/actions/workflows/update-keys.yml"><img src="https://img.shields.io/github/actions/workflow/status/v1kserr/V1Vpn-Free/update-keys.yml?style=for-the-badge&label=auto-update" alt="Автообновление"></a>
 <img src="https://img.shields.io/github/last-commit/v1kserr/V1Vpn-Free?style=for-the-badge" alt="Последний коммит">
 <img src="https://img.shields.io/github/stars/v1kserr/V1Vpn-Free?style=for-the-badge" alt="Звёзды">
 
@@ -20,8 +19,7 @@
 [🌐 Сайт](https://v1vpn-free.duckdns.org/) •
 [📖 Инструкция](https://v1vpn-free.duckdns.org/guide.html) •
 [🚀 Быстрый старт](#-быстрый-старт) •
-[📡 Подписки](#-подписки) •
-[⚙️ Как это устроено](#️-как-это-устроено)
+[📡 Подписки](#-подписки)
 
 </div>
 
@@ -32,8 +30,7 @@
 - 📋 **13 подписок** из трёх проверенных публичных источников в одном месте
 - 📋 **Копирование в один клик** — кнопка рядом с каждой ссылкой, с запасным вариантом для старых браузеров
 - 📖 **Пошаговая инструкция** по подключению для телефона и компьютера
-- 🔄 **Автообновление ключей** каждые 6 часов через GitHub Actions
-- 🚀 **Автодеплой** на сервер при каждом пуше в `main`
+- 🔗 **Ссылки ведут напрямую на источники**, поэтому ключи берутся у авторов
 - 🌑 **Тёмный минималистичный интерфейс** с блюром, адаптивный под телефон
 - 🪶 **Лёгкий сайт**: чистые HTML, CSS и JS, без фреймворков и сборки
 
@@ -129,55 +126,10 @@
 
 ---
 
-## ⚙️ Как это устроено
-
-В репозитории работают два независимых workflow.
-
-```mermaid
-flowchart LR
-    subgraph keys [🔄 Автообновление ключей]
-        direction LR
-        A["⏰ Каждые 6 часов<br>или вручную"] --> B["⬇️ Скачивание списка<br>igareck/vpn-configs-for-russia"]
-        B --> C{"Файл<br>не пустой?"}
-        C -- да --> D["📝 Коммит sub.txt"]
-        C -- нет --> E["❌ Ошибка, коммита нет"]
-    end
-
-    subgraph deploy [🚀 Деплой сайта]
-        direction LR
-        F["⬆️ Push в main"] --> G["🔐 SSH на сервер"]
-        G --> H["git pull"]
-        H --> I["🌐 v1vpn-free.duckdns.org"]
-    end
-```
-
-| Workflow | Файл | Когда запускается | Что делает |
-|---|---|---|---|
-| **Auto Update VPN Keys** | [`update-keys.yml`](.github/workflows/update-keys.yml) | каждые 6 часов и вручную | Скачивает `BLACK_SS+All_RUS.txt` в `sub.txt` и коммитит, если файл изменился |
-| **Deploy Website** | [`deploy.yml`](.github/workflows/deploy.yml) | при пуше в `main` | Заходит на сервер по SSH и делает `git pull` |
-
-### 🔐 Секреты для деплоя
-
-Чтобы деплой работал в твоём форке, добавь в **Settings → Secrets and variables → Actions**:
-
-| Секрет | Что это |
-|---|---|
-| `HOST` | IP или домен сервера |
-| `USERNAME` | пользователь SSH |
-| `SSH_KEY` | приватный SSH-ключ |
-
-На сервере сайт должен лежать в `/var/www/my-site` (путь меняется в `deploy.yml`).
-
----
-
 ## 📁 Структура репозитория
 
 ```text
 V1Vpn-Free/
-├── .github/
-│   └── workflows/
-│       ├── deploy.yml        # автодеплой на сервер по SSH
-│       └── update-keys.yml   # автообновление ключей каждые 6 часов
 ├── static/
 │   ├── css/style.css         # тёмная тема с блюром
 │   └── js/main.js            # копирование ссылок и уведомления
@@ -206,7 +158,6 @@ python3 -m http.server 8080
 
 - [x] Сайт со списком подписок и копированием в один клик
 - [x] Инструкция по подключению
-- [x] Автообновление ключей
 - [ ] Больше подписок, разложенных по типам и протоколам
 - [ ] Своё веб-приложение
 - [ ] Собственный VPN
