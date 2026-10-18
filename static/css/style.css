@@ -1,0 +1,142 @@
+/* V1Vpn-Free: Серый минимализм с блюром */
+
+:root {
+    --bg: #121316;
+    --card-bg: rgba(24, 26, 32, 0.75);
+    --card-border: rgba(255, 255, 255, 0.08);
+    --item-bg: rgba(16, 17, 21, 0.65);
+    --item-border: rgba(255, 255, 255, 0.06);
+    --text-primary: #ededef;
+    --text-secondary: #9da3af;
+    --btn-bg: #22242b;
+    --btn-border: #353842;
+    --btn-hover: #2e313b;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+    background-color: var(--bg);
+    background-image: 
+        radial-gradient(circle at 18% 12%, rgba(65, 72, 88, 0.25) 0%, transparent 45%),
+        radial-gradient(circle at 82% 80%, rgba(45, 50, 62, 0.28) 0%, transparent 50%);
+    background-attachment: fixed;
+    color: var(--text-primary);
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    line-height: 1.5;
+    padding: 48px 16px;
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+}
+
+.container { width: 100%; max-width: 780px; }
+
+/* Шапка и заголовки */
+.header { text-align: center; margin-bottom: 32px; }
+.title { font-size: 2.2rem; font-weight: 700; color: #fff; letter-spacing: -0.5px; margin-bottom: 8px; }
+.subtitle { color: var(--text-secondary); font-size: 1rem; }
+
+/* Кнопка перехода к инструкции */
+.guide-banner-btn {
+    display: inline-flex; align-items: center; gap: 8px; margin-top: 14px;
+    padding: 10px 22px; background: rgba(255, 255, 255, 0.07);
+    border: 1px solid rgba(255, 255, 255, 0.16); border-radius: 30px;
+    color: #fff; font-size: 0.95rem; font-weight: 600; text-decoration: none;
+    backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.25); transition: all 0.2s;
+}
+.guide-banner-btn:hover {
+    background: rgba(255, 255, 255, 0.14); border-color: rgba(255, 255, 255, 0.3);
+    transform: translateY(-2px); box-shadow: 0 8px 24px rgba(0, 0, 0, 0.35);
+}
+
+/* Карточка с размытым фоном */
+.sub-key {
+    background: var(--card-bg); border: 1px solid var(--card-border);
+    backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
+    border-radius: 16px; padding: 30px 24px; box-shadow: 0 16px 40px rgba(0, 0, 0, 0.4);
+    overflow: hidden;
+}
+
+.sub-key h4 {
+    font-size: 1.02rem; font-weight: 600; color: #f1f2f5;
+    margin-top: 28px; margin-bottom: 16px; padding-bottom: 8px;
+    border-bottom: 1px solid var(--card-border);
+}
+.sub-key h4:first-child { margin-top: 0; }
+
+/* Элементы подписок */
+.sub-item {
+    background: var(--item-bg); border: 1px solid var(--item-border);
+    border-radius: 10px; padding: 12px 14px; margin-bottom: 12px;
+    transition: all 0.2s ease;
+}
+.sub-item:hover { border-color: rgba(255, 255, 255, 0.15); background: rgba(22, 24, 30, 0.85); }
+.sub-info { display: flex; justify-content: space-between; align-items: center; gap: 12px; margin-bottom: 8px; }
+.sub-name { font-size: 0.92rem; font-weight: 600; color: #fff; }
+
+.copy-btn {
+    background: var(--btn-bg); border: 1px solid var(--btn-border);
+    color: #cbd5e1; font-size: 0.78rem; font-weight: 500;
+    padding: 4px 10px; border-radius: 6px; cursor: pointer; transition: all 0.2s; white-space: nowrap;
+}
+.copy-btn:hover { background: var(--btn-hover); color: #fff; }
+.copy-btn.copied { background: #1f3328; border-color: #2d553f; color: #6ee7b7; }
+
+.sub-url {
+    font-family: ui-monospace, SFMono-Regular, monospace; font-size: 0.8rem;
+    color: #8b92a0; background: rgba(10, 11, 14, 0.7);
+    border: 1px solid rgba(255, 255, 255, 0.04); border-radius: 6px;
+    padding: 8px 10px; word-break: break-all; overflow-wrap: anywhere; user-select: all;
+}
+.sub-item:hover .sub-url { color: #cbd5e1; }
+
+/* Страница guide.html */
+.guide-back { display: inline-flex; align-items: center; color: var(--text-secondary); text-decoration: none; font-size: 0.88rem; margin-bottom: 14px; }
+.guide-back:hover { color: #fff; }
+.guide-content { overflow: visible; }
+.guide-section { margin-bottom: 32px; padding-bottom: 24px; border-bottom: 1px solid var(--card-border); }
+.guide-section:last-of-type { margin-bottom: 16px; padding-bottom: 16px; border-bottom: none; }
+.guide-badge {
+    display: inline-block; background: rgba(255, 255, 255, 0.06); border: 1px solid rgba(255, 255, 255, 0.12);
+    color: #a1a1aa; font-size: 0.76rem; font-weight: 600; text-transform: uppercase; padding: 3px 10px; border-radius: 6px; margin-bottom: 10px;
+}
+.guide-section h3 { font-size: 1.25rem; font-weight: 700; color: #fff; margin-bottom: 6px; }
+.guide-desc { color: var(--text-secondary); font-size: 0.92rem; margin-bottom: 18px; }
+.guide-step { display: flex; gap: 14px; margin-bottom: 14px; align-items: flex-start; }
+.step-num {
+    flex-shrink: 0; width: 28px; height: 28px; line-height: 26px; text-align: center;
+    border-radius: 50%; background: #22242c; border: 1px solid #3c404e; color: #fff; font-weight: 700; font-size: 0.84rem;
+}
+.step-body strong { color: #fff; font-size: 0.95rem; display: block; margin-bottom: 2px; }
+.step-body p { color: var(--text-secondary); font-size: 0.88rem; line-height: 1.45; }
+.step-body em { color: #e2e8f0; font-style: normal; background: rgba(255, 255, 255, 0.06); padding: 1px 5px; border-radius: 4px; }
+.inline-link { color: #cbd5e1; text-decoration: underline; }
+.guide-success { background: rgba(34, 197, 94, 0.08); border: 1px solid rgba(34, 197, 94, 0.25); border-radius: 8px; padding: 12px 16px; color: #86efac; font-size: 0.92rem; margin-top: 18px; }
+.tips-list { display: flex; flex-direction: column; gap: 12px; }
+.tip-item { background: var(--item-bg); border: 1px solid var(--item-border); border-radius: 8px; padding: 12px 14px; }
+.tip-item strong { color: #e2e8f0; font-size: 0.92rem; display: block; margin-bottom: 3px; }
+.tip-item p { color: var(--text-secondary); font-size: 0.86rem; }
+.guide-footer-action { text-align: center; margin-top: 24px; }
+.guide-primary-btn { display: inline-block; background: var(--btn-bg); border: 1px solid var(--btn-border); color: #fff; padding: 11px 22px; border-radius: 8px; text-decoration: none; font-size: 0.92rem; font-weight: 600; }
+.guide-primary-btn:hover { background: var(--btn-hover); border-color: rgba(255, 255, 255, 0.2); }
+
+/* Всплывающее уведомление */
+.toast {
+    position: fixed; bottom: 24px; left: 50%; transform: translateX(-50%) translateY(40px);
+    background: #1e2026; border: 1px solid #363a45; color: #f1f2f5; font-size: 0.86rem;
+    padding: 10px 18px; border-radius: 8px; box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5);
+    opacity: 0; pointer-events: none; transition: all 0.25s ease;
+}
+.toast.show { transform: translateX(-50%) translateY(0); opacity: 1; }
+
+/* Адаптив */
+@media (max-width: 640px) {
+    body { padding: 24px 12px; }
+    .title { font-size: 1.75rem; }
+    .sub-key { padding: 20px 14px; border-radius: 12px; }
+    .sub-info { flex-wrap: wrap; }
+    .copy-btn { margin-left: auto; }
+    .guide-banner-btn { width: 100%; justify-content: center; }
+}

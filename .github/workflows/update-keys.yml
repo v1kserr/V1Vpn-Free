@@ -1,0 +1,42 @@
+name: Auto Update VPN Keys
+
+on:
+  schedule:
+    # Запуск каждые 6 часов
+    - cron: '0 */6 * * *'
+  # Возможность запустить обновление вручную в 1 клик на вкладке Actions
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  update-keys:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Download latest keys from igareck repo
+        run: |
+          curl -sSL "https://raw.githubusercontent.com/igareck/vpn-configs-for-russia/main/BLACK_SS%2BAll_RUS.txt" -o sub.txt
+          
+          # Проверяем, что файл не пустой
+          if [ -s sub.txt ]; then
+            echo "Файл sub.txt успешно скачан!"
+          else
+            echo "Ошибка: скачанный файл пуст"
+            exit 1
+          fi
+
+      - name: Commit and push changes
+        run: |
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "github-actions[bot]@users.noreply.github.com"
+          git add sub.txt
+          if git diff --staged --quiet; then
+            echo "Ключи не изменились, коммит не требуется."
+          else
+            git commit -m "chore(keys): автообновление ключей из igareck/vpn-configs-for-russia"
+            git push origin main
+          fi
